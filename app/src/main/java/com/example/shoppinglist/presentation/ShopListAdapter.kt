@@ -15,6 +15,9 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopListViewHolder>
     private val TAG = "ShopListAdapter"
     private var count = 0
 
+    var onClickListener: ((ShopItem) -> Unit)? = null
+    var onLongClickListener: ((ShopItem) -> Unit)? = null
+
     inner class ShopListViewHolder(val view: View) :
         RecyclerView.ViewHolder(view) {
         val cvShopItem = view.findViewById<CardView>(R.id.cvShopItem)
@@ -50,7 +53,15 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopListViewHolder>
         with(holder) {
             tvTitle.text = shopItem.name
             tvCount.text = shopItem.count.toString()
-            cvShopItem.setOnLongClickListener { true }
+            cvShopItem.apply {
+                setOnClickListener {
+                    onClickListener?.invoke(shopItem)
+                }
+                setOnLongClickListener {
+                    onLongClickListener?.invoke(shopItem)
+                    true
+                }
+            }
         }
     }
 
