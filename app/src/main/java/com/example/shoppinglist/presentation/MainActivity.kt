@@ -15,9 +15,6 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-
-    private val TAG = "MainActivity"
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var shopListAdapter: ShopListAdapter
 
@@ -30,8 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
-            Log.d(TAG, it.toString())
-            shopListAdapter.shopList = it
+            shopListAdapter.submitList(it)
         }
 
     }
@@ -56,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupOnClickListener() {
         shopListAdapter.onClickListener = {
-            Log.d(TAG, "setupOnClickListener: $it")
+
         }
     }
 
@@ -80,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val shopItem = shopListAdapter.shopList[viewHolder.adapterPosition]
+                val shopItem = shopListAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteShopItem(shopItem)
             }
         }
