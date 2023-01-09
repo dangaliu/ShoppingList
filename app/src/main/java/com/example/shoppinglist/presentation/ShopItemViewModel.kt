@@ -40,7 +40,7 @@ class ShopItemViewModel : ViewModel() {
         if (fieldsValid) {
             val item = ShopItem(name = name, count = count, enabled = true)
             addShopItemUseCase.addShopItem(item)
-            _shouldCloseScreen.value = Unit
+            finishWork()
         }
     }
 
@@ -52,6 +52,7 @@ class ShopItemViewModel : ViewModel() {
             _shopItem.value?.let {
                 val item = it.copy(name = name, count = count)
                 editShopItemUseCase.editShopItem(item)
+                finishWork()
             }
         }
     }
@@ -79,5 +80,9 @@ class ShopItemViewModel : ViewModel() {
             result = false
         }
         return result
+    }
+
+    private fun finishWork() {
+        _shouldCloseScreen.value = Unit
     }
 }
