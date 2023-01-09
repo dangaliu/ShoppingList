@@ -1,18 +1,13 @@
 package com.example.shoppinglist.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
-import com.example.shoppinglist.domain.ShopItem
-import kotlin.math.log
 
-class MainActivity : AppCompatActivity() {
+class ShopListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
