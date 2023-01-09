@@ -25,6 +25,9 @@ class ShopListActivity : AppCompatActivity() {
             shopListAdapter.submitList(it)
         }
 
+        binding.btnAdd.setOnClickListener {
+            startActivity(ShopItemActivity.newIntentAddMode(this))
+        }
     }
 
     private fun setupRecyclerView() {
@@ -47,7 +50,7 @@ class ShopListActivity : AppCompatActivity() {
 
     private fun setupOnClickListener() {
         shopListAdapter.onClickListener = {
-
+            startActivity(ShopItemActivity.newIntentEditMode(this, it.id))
         }
     }
 
