@@ -57,6 +57,14 @@ class ShopItemViewModel : ViewModel() {
         }
     }
 
+    fun resetNameInputError() {
+        _errorInputName.value = false
+    }
+
+    fun resetCountInputError() {
+        _errorInputCount.value = false
+    }
+
     private fun parseName(name: String?): String {
         return name?.trim() ?: ""
     }
@@ -72,7 +80,7 @@ class ShopItemViewModel : ViewModel() {
     private fun validateInput(name: String, count: Int): Boolean {
         var result = true
         if (name.isBlank()) {
-            _errorInputCount.value = true
+            _errorInputName.value = true
             result = false
         }
         if (count <= 0) {
